@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import theme from "../theme";
 import AppBar from "./AppBar";
-import RepositoryList from "./RepositoyList";
+import RepositoryList from "./RepositoryList";
 
 // import Text from "./Text";
 // import RepositoryList from "./RepositoyList";
@@ -10,6 +11,7 @@ const styles = StyleSheet.create({
 	container: {
 		flexGrow: 1,
 		flexShrink: 1,
+		backgroundColor: theme.colors.bgSecondary,
 	},
 });
 
@@ -19,14 +21,6 @@ const Main = () => {
 			<AppBar />
 			{/* <Text>Rate Repository Application</Text> */}
 			<RepositoryList />
-			{/* <>
-				<Text>Simple text</Text>
-				<Text style={{ paddingBottom: 10 }}>Text with custom style</Text>
-				<Text fontWeight="bold" fontSize="subheading">
-					Bold subheading
-				</Text>
-				<Text color="textSecondary">Text with secondary color</Text> 
-			</>*/}
 		</View>
 	);
 };
