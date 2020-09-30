@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { Route, Switch, Redirect } from "react-router-native";
 import theme from "../theme";
 import AppBar from "./AppBar";
 import RepositoryList from "./RepositoryList";
+import SignIn from "./SignIn";
 
 // import Text from "./Text";
 // import RepositoryList from "./RepositoyList";
@@ -19,8 +21,15 @@ const Main = () => {
 	return (
 		<View style={styles.container}>
 			<AppBar />
-			{/* <Text>Rate Repository Application</Text> */}
-			<RepositoryList />
+			<Switch>
+				<Route path="/signin" exact>
+					<SignIn />
+				</Route>
+				<Route path="/" exact>
+					<RepositoryList />
+				</Route>
+				<Redirect to="/" />
+			</Switch>
 		</View>
 	);
 };

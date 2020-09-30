@@ -1,7 +1,18 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Link } from "react-router-native";
 import theme from "../theme";
 import Text from "./Text";
+
+const MyComp = ({ text, ...props }) => {
+	return (
+		<TouchableOpacity {...props}>
+			<Text style={styles.text} fontWeight="bold">
+				{text}
+			</Text>
+		</TouchableOpacity>
+	);
+};
 
 const styles = StyleSheet.create({
 	text: {
@@ -9,13 +20,14 @@ const styles = StyleSheet.create({
 	},
 });
 
-const AppBarTab = () => {
+const AppBarTab = ({ text, route }) => {
 	return (
-		<TouchableWithoutFeedback>
-			<Text style={styles.text} fontWeight="bold">
-				Repositories
-			</Text>
-		</TouchableWithoutFeedback>
+		<Link
+			to={route ? route : "/"}
+			text={text}
+			component={MyComp}
+			activeOpacity={0.5}
+		/>
 	);
 };
 
