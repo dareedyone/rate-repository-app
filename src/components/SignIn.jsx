@@ -1,9 +1,62 @@
+import { Formik } from "formik";
 import React from "react";
-
+import { TouchableWithoutFeedback, View } from "react-native";
+import theme from "../theme";
+import FormikTextInput from "./FormikTextInput";
 import Text from "./Text";
 
+const styles = {
+	container: {
+		backgroundColor: "white",
+		padding: 15,
+	},
+	input: {
+		padding: 15,
+		borderWidth: 1,
+		marginVertical: 4,
+		borderRadius: 4,
+	},
+	button: {
+		padding: 15,
+		marginVertical: 4,
+		borderRadius: 4,
+		textAlign: "center",
+		backgroundColor: theme.colors.primary,
+		color: theme.colors.colorWhite,
+	},
+};
+
+const SignInForm = ({ onSubmit }) => {
+	return (
+		<View style={styles.container}>
+			<FormikTextInput
+				style={styles.input}
+				name="username"
+				placeholder="Username"
+			/>
+			<FormikTextInput
+				style={styles.input}
+				secureTextEntry={true}
+				name="password"
+				placeholder="Password"
+			/>
+			<TouchableWithoutFeedback onPress={onSubmit}>
+				<Text style={styles.button}>Sign in</Text>
+			</TouchableWithoutFeedback>
+		</View>
+	);
+};
+
 const SignIn = () => {
-	return <Text>The sign in view</Text>;
+	const initialValues = { username: "", password: "" };
+	const handleSubmit = (values) => {
+		console.log(values);
+	};
+	return (
+		<Formik initialValues={initialValues} onSubmit={handleSubmit}>
+			{({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+		</Formik>
+	);
 };
 
 export default SignIn;
