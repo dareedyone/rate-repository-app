@@ -27,6 +27,7 @@ const AppBarTab = ({ text, route }) => {
 			text={text}
 			component={MyComp}
 			activeOpacity={0.5}
+			style={{ marginLeft: 15 }}
 		/>
 	);
 };
