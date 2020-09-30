@@ -7,6 +7,7 @@ const theme = {
 		colorWhite: "#FFFFFF",
 		bgSecondary: "#e1e4e8",
 		btnPrimary: "#147EF0",
+		danger: "#d73a4a",
 	},
 	fontSizes: {
 		body: 14,
