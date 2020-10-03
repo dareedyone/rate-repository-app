@@ -5,7 +5,7 @@ const useRepositories = () => {
 	// const [repositories, setRepositories] = useState();
 	// const [loading, setLoading] = useState(false);
 	const {
-		data: { repositories },
+		data,
 		// eslint-disable-next-line no-unused-vars
 		error,
 		loading,
@@ -13,7 +13,7 @@ const useRepositories = () => {
 		fetchPolicy: "cache-and-network",
 		// Other options
 	});
-
+	const repositories = data?.repositories;
 	// console.log(
 	// 	"REPOOOOOOOOOOOOO HEEEEEEEEEEEREEEEEEEEEEEEEEEEEEE",
 	// 	repositories

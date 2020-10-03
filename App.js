@@ -4,9 +4,8 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import createApolloClient from "./src/utils/apolloClient";
 
 import Main from "./src/components/Main";
-
+const apolloClient = createApolloClient();
 const App = () => {
-	const apolloClient = createApolloClient();
 	return (
 		<NativeRouter>
 			<ApolloProvider client={apolloClient}>
