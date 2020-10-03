@@ -6,6 +6,7 @@ import FormikTextInput from "./FormikTextInput";
 import Text from "./Text";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
+import { userAuthStorage } from "../utils/authStorage";
 
 const styles = {
 	container: {
@@ -61,6 +62,7 @@ const SignIn = () => {
 	const handleSubmit = async ({ username, password }) => {
 		try {
 			const { data } = await signIn({ username, password });
+			userAuthStorage.setAccessToken(data);
 			console.log(data);
 		} catch (e) {
 			console.log(e);
