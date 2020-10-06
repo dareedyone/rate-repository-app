@@ -5,10 +5,6 @@ import { RepositoryListContainer } from "../components/RepositoryList";
 describe("RepositoryList", () => {
 	describe("RepositoryListContainer", () => {
 		it("renders repository information correctly", () => {
-			const { getAllByTestId } = render(
-				<RepositoryListContainer repositories={repositories} />
-			);
-
 			const repositories = {
 				pageInfo: {
 					totalCount: 8,
@@ -51,25 +47,47 @@ describe("RepositoryList", () => {
 					},
 				],
 			};
+			const { getAllByTestId } = render(
+				<RepositoryListContainer repositories={repositories} />
+			);
+
 			// Add your test code here
-			expect(getAllByTestId("repositoryName"))[0].toHaveTextContext(
+			expect(getAllByTestId("repositoryName")[0]).toHaveTextContent(
 				"jaredpalmer/formik"
 			);
-			expect(getAllByTestId("repositoryDescription"))[0].toHaveTextContext(
+			expect(getAllByTestId("repositoryDescription")[0]).toHaveTextContent(
 				"Build forms in React, without the tears"
 			);
-			expect(getAllByTestId("repositoryLanguage"))[0].toHaveTextContext(
+			expect(getAllByTestId("repositoryLanguage")[0]).toHaveTextContent(
 				"TypeScript"
 			);
-			expect(getAllByTestId("repositoryStargazersCount"))[0].toHaveTextContext(
-				"21.8k"
+			expect(getAllByTestId("repositoryStargazersCount")[0]).toHaveTextContent(
+				"21.9k"
 			);
-			expect(getAllByTestId("repositoryForksCount"))[0].toHaveTextContext(
+			expect(getAllByTestId("repositoryForksCount")[0]).toHaveTextContent(
 				"1.6k"
 			);
-			expect(getAllByTestId("repositoryReviewCount"))[0].toHaveTextContext("3");
-			expect(getAllByTestId("repositoryRatingAverage"))[0].toHaveTextContext(
+			expect(getAllByTestId("repositoryReviewCount")[0]).toHaveTextContent("3");
+			expect(getAllByTestId("repositoryRatingAverage")[0]).toHaveTextContent(
 				"88"
+			);
+
+			expect(getAllByTestId("repositoryName")[1]).toHaveTextContent(
+				"async-library/react-async"
+			);
+			expect(getAllByTestId("repositoryDescription")[1]).toHaveTextContent(
+				"Flexible promise-based React data loader"
+			);
+			expect(getAllByTestId("repositoryLanguage")[1]).toHaveTextContent(
+				"JavaScript"
+			);
+			expect(getAllByTestId("repositoryStargazersCount")[1]).toHaveTextContent(
+				"1.8k"
+			);
+			expect(getAllByTestId("repositoryForksCount")[1]).toHaveTextContent("69");
+			expect(getAllByTestId("repositoryReviewCount")[1]).toHaveTextContent("3");
+			expect(getAllByTestId("repositoryRatingAverage")[1]).toHaveTextContent(
+				"72"
 			);
 		});
 	});
