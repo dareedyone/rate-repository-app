@@ -87,37 +87,50 @@ const RepositoryItem = ({ item }) => {
 					source={{ uri: item.ownerAvatarUrl }}
 				/>
 				<View style={styles.headerTextsContainer}>
-					<Text style={styles.headerName}> {item.fullName}</Text>
-					<Text style={styles.headerDescription}>{item.description}</Text>
+					<Text testID="repositoryName" style={styles.headerName}>
+						{item.fullName}
+					</Text>
+					<Text testID="repositoryDescription" style={styles.headerDescription}>
+						{item.description}
+					</Text>
 					<View style={styles.headerLanguage}>
 						<View style={styles.headerLanguageBtn}>
-							<Text style={styles.headerLanguageText}>{item.language}</Text>
+							<Text
+								testID="repositoryLanguage"
+								style={styles.headerLanguageText}
+							>
+								{item.language}
+							</Text>
 						</View>
 					</View>
 				</View>
 			</View>
 			<View style={styles.flexBrowserCustom}>
 				<View>
-					<Text style={styles.footerEach}>
+					<Text testID="repositoryStargazersCount" style={styles.footerEach}>
 						{formatToThousand(item.stargazersCount)}
 					</Text>
 					<Text style={styles.footerKey}>Stars</Text>
 				</View>
 
 				<View>
-					<Text style={styles.footerEach}>
+					<Text testID="repositoryForksCount" style={styles.footerEach}>
 						{formatToThousand(item.forksCount)}
 					</Text>
 					<Text style={styles.footerKey}>Forks</Text>
 				</View>
 
 				<View>
-					<Text style={styles.footerEach}>{item.reviewCount}</Text>
+					<Text testID="repositoryReviewCount" style={styles.footerEach}>
+						{item.reviewCount}
+					</Text>
 					<Text style={styles.footerKey}>Reviews</Text>
 				</View>
 
 				<View>
-					<Text style={styles.footerEach}>{item.ratingAverage}</Text>
+					<Text testID="repositoryRatingAverage" style={styles.footerEach}>
+						{item.ratingAverage}
+					</Text>
 					<Text style={styles.footerKey}>Rating </Text>
 				</View>
 			</View>
