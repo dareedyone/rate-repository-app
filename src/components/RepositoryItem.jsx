@@ -1,8 +1,20 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	StyleSheet,
+	TouchableOpacity,
+	Linking,
+} from "react-native";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
+	container: {
+		backgroundColor: theme.colors.colorWhite,
+		paddingVertical: 20,
+		paddingHorizontal: 23,
+	},
 	headerContainer: {
 		display: "flex",
 		flexDirection: "row",
@@ -52,8 +64,21 @@ const styles = StyleSheet.create({
 	footerKey: {
 		color: theme.colors.textSecondary,
 	},
+	githubButton: {
+		backgroundColor: theme.colors.primary,
+		paddingVertical: 9,
+		flexGrow: 0,
+		borderRadius: 3,
+		marginVertical: 15,
+	},
+
+	githubButtonText: {
+		color: theme.colors.colorWhite,
+		textAlign: "center",
+		fontWeight: "bold",
+	},
 });
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, history, singleView }) => {
 	const convertAndRound = (index, params) => {
 		const first = params.substr(0, index);
 		const last = params.substr(index, 2);
@@ -75,66 +100,97 @@ const RepositoryItem = ({ item }) => {
 				params = convertAndRound(3, params);
 				break;
 			default:
-				return "1m+";
+				return null;
 		}
 		return (params += "k");
 	};
-	return (
-		<View>
-			<View style={styles.headerContainer}>
-				<Image
-					style={styles.headerAvatar}
-					source={{ uri: item.ownerAvatarUrl }}
-				/>
-				<View style={styles.headerTextsContainer}>
-					<Text testID="repositoryName" style={styles.headerName}>
-						{item.fullName}
-					</Text>
-					<Text testID="repositoryDescription" style={styles.headerDescription}>
-						{item.description}
-					</Text>
-					<View style={styles.headerLanguage}>
-						<View style={styles.headerLanguageBtn}>
-							<Text
-								testID="repositoryLanguage"
-								style={styles.headerLanguageText}
-							>
-								{item.language}
-							</Text>
+
+	const goToGithub = () => {
+		Linking.openURL(item.url);
+	};
+
+	const goToRepoView = () => {
+		history.push(`/repoview/${item.id}`);
+	};
+
+	const UnpressableRepo = () => {
+		return (
+			<View style={styles.container}>
+				<View style={styles.headerContainer}>
+					<Image
+						style={styles.headerAvatar}
+						source={{ uri: item.ownerAvatarUrl }}
+					/>
+					<View style={styles.headerTextsContainer}>
+						<Text testID="repositoryName" style={styles.headerName}>
+							{item.fullName}
+						</Text>
+						<Text
+							testID="repositoryDescription"
+							style={styles.headerDescription}
+						>
+							{item.description}
+						</Text>
+						<View style={styles.headerLanguage}>
+							<View style={styles.headerLanguageBtn}>
+								<Text
+									testID="repositoryLanguage"
+									style={styles.headerLanguageText}
+								>
+									{item.language}
+								</Text>
+							</View>
 						</View>
 					</View>
 				</View>
+				<View style={styles.flexBrowserCustom}>
+					<View>
+						<Text testID="repositoryStargazersCount" style={styles.footerEach}>
+							{formatToThousand(item.stargazersCount)}
+						</Text>
+						<Text style={styles.footerKey}>Stars</Text>
+					</View>
+
+					<View>
+						<Text testID="repositoryForksCount" style={styles.footerEach}>
+							{formatToThousand(item.forksCount)}
+						</Text>
+						<Text style={styles.footerKey}>Forks</Text>
+					</View>
+
+					<View>
+						<Text testID="repositoryReviewCount" style={styles.footerEach}>
+							{item.reviewCount}
+						</Text>
+						<Text style={styles.footerKey}>Reviews</Text>
+					</View>
+
+					<View>
+						<Text testID="repositoryRatingAverage" style={styles.footerEach}>
+							{item.ratingAverage}
+						</Text>
+						<Text style={styles.footerKey}>Rating </Text>
+					</View>
+				</View>
+				{singleView && (
+					<TouchableOpacity
+						onPress={goToGithub}
+						activeOpacity={0.9}
+						style={styles.githubButton}
+					>
+						<Text style={styles.githubButtonText}>Open in Github</Text>
+					</TouchableOpacity>
+				)}
 			</View>
-			<View style={styles.flexBrowserCustom}>
-				<View>
-					<Text testID="repositoryStargazersCount" style={styles.footerEach}>
-						{formatToThousand(item.stargazersCount)}
-					</Text>
-					<Text style={styles.footerKey}>Stars</Text>
-				</View>
+		);
+	};
 
-				<View>
-					<Text testID="repositoryForksCount" style={styles.footerEach}>
-						{formatToThousand(item.forksCount)}
-					</Text>
-					<Text style={styles.footerKey}>Forks</Text>
-				</View>
-
-				<View>
-					<Text testID="repositoryReviewCount" style={styles.footerEach}>
-						{item.reviewCount}
-					</Text>
-					<Text style={styles.footerKey}>Reviews</Text>
-				</View>
-
-				<View>
-					<Text testID="repositoryRatingAverage" style={styles.footerEach}>
-						{item.ratingAverage}
-					</Text>
-					<Text style={styles.footerKey}>Rating </Text>
-				</View>
-			</View>
-		</View>
+	return singleView ? (
+		<UnpressableRepo />
+	) : (
+		<TouchableOpacity onPress={goToRepoView}>
+			<UnpressableRepo />
+		</TouchableOpacity>
 	);
 };
 
