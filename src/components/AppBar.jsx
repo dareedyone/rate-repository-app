@@ -34,7 +34,8 @@ const AppBar = () => {
 				<AppBarTab text="Repositories" />
 				{data?.authorizedUser ? (
 					<TouchableOpacity
-						style={{ marginLeft: 15, activeOpacity: 0.5 }}
+						style={{ marginLeft: 15 }}
+						activeOpacity={0.5}
 						onPress={handleLogOut}
 					>
 						<Text style={{ color: "white" }} fontWeight="bold">
