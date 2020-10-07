@@ -19,23 +19,28 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 	},
+	headerAvatarContainer: {
+		alignSelf: "flex-start",
+		// backgroundColor: "red",
+		width: "16%",
+	},
 	headerAvatar: {
 		alignSelf: "flex-start",
 		width: 50,
 		height: 50,
 	},
 	headerTextsContainer: {
-		marginLeft: 20,
+		// backgroundColor: "orange",
+		width: "84%",
 		display: "flex",
 		justifyContent: "space-between",
+		paddingLeft: 20,
 	},
 	headerName: {
 		fontWeight: "bold",
 	},
 	headerDescription: {
 		color: theme.colors.textSecondary,
-		width: "95%",
-		padding: 5,
 	},
 	headerLanguage: {
 		display: "flex",
@@ -117,10 +122,13 @@ const RepositoryItem = ({ item, history, singleView }) => {
 		return (
 			<View style={styles.container}>
 				<View style={styles.headerContainer}>
-					<Image
-						style={styles.headerAvatar}
-						source={{ uri: item.ownerAvatarUrl }}
-					/>
+					<View style={styles.headerAvatarContainer}>
+						<Image
+							style={styles.headerAvatar}
+							source={{ uri: item.ownerAvatarUrl }}
+						/>
+					</View>
+
 					<View style={styles.headerTextsContainer}>
 						<Text testID="repositoryName" style={styles.headerName}>
 							{item.fullName}
