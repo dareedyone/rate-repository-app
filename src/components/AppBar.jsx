@@ -12,7 +12,8 @@ import { useHistory } from "react-router-native";
 const styles = StyleSheet.create({
 	container: {
 		paddingTop: Constants.statusBarHeight + 30,
-		padding: 30,
+		paddingBottom: 20,
+		paddingLeft: 10,
 		backgroundColor: theme.colors.bgPrimary,
 	},
 });
@@ -46,7 +47,10 @@ const AppBar = () => {
 						</TouchableOpacity>
 					</>
 				) : (
-					<AppBarTab route="/signin" text="Sign in" />
+					<>
+						<AppBarTab route="/signin" text="Sign In" />
+						<AppBarTab route="/signup" text="Sign Up" />
+					</>
 				)}
 			</ScrollView>
 		</View>

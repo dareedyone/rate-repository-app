@@ -7,6 +7,7 @@ import SignleRepository from "./SingleRepository";
 import RepositoryList from "./RepositoryList";
 import SignIn from "./SignIn";
 import CreateReview from "./CreateReview";
+import SignUp from "./SignUp";
 
 // import Text from "./Text";
 // import RepositoryList from "./RepositoyList";
@@ -26,6 +27,9 @@ const Main = () => {
 			<Switch>
 				<Route path="/signin" exact>
 					<SignIn />
+				</Route>
+				<Route path="/signup" exact>
+					<SignUp />
 				</Route>
 				<Route path="/repoview/:id" exact>
 					<SignleRepository />
