@@ -53,14 +53,15 @@ const SingleRepository = () => {
 	const { id } = useParams();
 
 	const { loading, data } = useQuery(GET_REPOSITORY, {
+		fetchPolicy: "cache-and-network",
 		variables: { id },
 	});
-	// console.log("data", data);
+	console.log("data", data);
 	const reviewNodes = data?.repository
 		? data?.repository?.reviews?.edges?.map((edge) => edge.node)
 		: [];
 
-	// console.log("reviewNodes", reviewNodes);
+	console.log("reviewNodes", reviewNodes);
 
 	if (loading) return <Text>loading</Text>;
 	const ReviewItem = ({ review }) => {

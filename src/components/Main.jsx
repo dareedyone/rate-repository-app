@@ -6,6 +6,7 @@ import AppBar from "./AppBar";
 import SignleRepository from "./SingleRepository";
 import RepositoryList from "./RepositoryList";
 import SignIn from "./SignIn";
+import CreateReview from "./CreateReview";
 
 // import Text from "./Text";
 // import RepositoryList from "./RepositoyList";
@@ -28,6 +29,9 @@ const Main = () => {
 				</Route>
 				<Route path="/repoview/:id" exact>
 					<SignleRepository />
+				</Route>
+				<Route path="/create-review" exact>
+					<CreateReview />
 				</Route>
 				<Route path="/" exact>
 					<RepositoryList />
