@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../hooks/useRepositories";
 import { useHistory } from "react-router-native";
+import RNPickerSelect from "react-native-picker-select";
 
 const styles = StyleSheet.create({
 	container: {
@@ -60,20 +61,55 @@ const styles = StyleSheet.create({
 // 		ownerAvatarUrl: "https://avatars3.githubusercontent.com/u/13142323?v=4",
 // 	},
 // ];
-
+let selectedValue;
+export const Dropdown = ({ setReposOption }) => {
+	return (
+		<View style={{ paddingHorizontal: 15 }}>
+			<RNPickerSelect
+				value={selectedValue}
+				onValueChange={(value) => {
+					setReposOption(JSON.parse(value));
+					selectedValue = value;
+				}}
+				items={[
+					{
+						label: "Latest Repositories",
+						value: JSON.stringify({
+							orderBy: "CREATED_AT",
+							orderDirection: "DESC",
+						}),
+					},
+					{
+						label: "Highest rated Repositories",
+						value: JSON.stringify({
+							orderBy: "RATING_AVERAGE",
+							orderDirection: "DESC",
+						}),
+					},
+					{
+						label: "Lowest rated Repositories",
+						value: JSON.stringify({
+							orderBy: "RATING_AVERAGE",
+							orderDirection: "ASC",
+						}),
+					},
+				]}
+			/>
+		</View>
+	);
+};
 const ItemSeparator = () => <View style={styles.separator} />;
-export const RepositoryListContainer = ({ repositories }) => {
+
+export const RepositoryListContainer = ({ repositories, setReposOption }) => {
 	// Get the nodes from the edges array
 	const history = useHistory();
-	const repositoryNodes = repositories
-		? repositories?.edges?.map((edge) => edge.node)
-		: [];
-
-	console.log(repositoryNodes);
+	// console.log("setRepo REACH RPLC", setReposOption);
+	// console.log(repositories);
 	return (
 		<FlatList
-			data={repositoryNodes}
+			data={repositories}
 			ItemSeparatorComponent={ItemSeparator}
+			ListHeaderComponent={() => <Dropdown setReposOption={setReposOption} />}
 			renderItem={({ item }) => (
 				<RepositoryItem item={item} history={history} />
 			)}
@@ -85,8 +121,16 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-	const { repositories } = useRepositories();
-	return <RepositoryListContainer repositories={repositories} />;
+	const { repositories, setReposOption } = useRepositories();
+	const repositoryNodes = repositories
+		? repositories?.edges?.map((edge) => edge.node)
+		: [];
+	return (
+		<RepositoryListContainer
+			setReposOption={setReposOption}
+			repositories={repositoryNodes}
+		/>
+	);
 };
 
 export default RepositoryList;

@@ -1,7 +1,10 @@
 import { gql } from "apollo-boost";
 export const GET_REPOSITORIES = gql`
-	query {
-		repositories {
+	query repositories(
+		$orderBy: AllRepositoriesOrderBy
+		$orderDirection: OrderDirection
+	) {
+		repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
 			pageInfo {
 				hasNextPage
 				totalCount
