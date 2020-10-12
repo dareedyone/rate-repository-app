@@ -41,10 +41,32 @@ export const GET_REPOSITORIES = gql`
 	}
 `;
 export const AUTHORIZED_USER = gql`
-	query {
+	query getAuthorizedUser($includeReviews: Boolean = false) {
 		authorizedUser {
 			id
 			username
+			reviews @include(if: $includeReviews) {
+				edges {
+					node {
+						id
+						text
+						rating
+						createdAt
+						repositoryId
+						user {
+							id
+							username
+						}
+					}
+					cursor
+				}
+				pageInfo {
+					endCursor
+					startCursor
+					totalCount
+					hasNextPage
+				}
+			}
 		}
 	}
 `;

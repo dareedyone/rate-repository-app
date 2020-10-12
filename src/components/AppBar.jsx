@@ -36,6 +36,7 @@ const AppBar = () => {
 				{data?.authorizedUser ? (
 					<>
 						<AppBarTab route="/create-review" text="Create a review" />
+						<AppBarTab route="/myreviews" text="My reviews" />
 						<TouchableOpacity
 							style={{ marginLeft: 15 }}
 							activeOpacity={0.5}

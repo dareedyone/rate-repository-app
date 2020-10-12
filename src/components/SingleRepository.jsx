@@ -58,7 +58,7 @@ const SingleRepository = () => {
 	});
 
 	const handleFetchMore = () => {
-		console.log("review handleFectch ran");
+		// console.log("review handleFectch ran");
 		const canFetchMore =
 			!loading && data?.repository?.reviews?.pageInfo?.hasNextPage;
 		if (!canFetchMore) return;
@@ -70,7 +70,7 @@ const SingleRepository = () => {
 				first: 8,
 			},
 			updateQuery: (previousResult, { fetchMoreResult }) => {
-				console.log("see this more result", fetchMoreResult);
+				// console.log("see this more result", fetchMoreResult);
 				const nextResult = {
 					repository: {
 						...fetchMoreResult.repository,
@@ -88,12 +88,12 @@ const SingleRepository = () => {
 			},
 		});
 	};
-	console.log("data", data);
+	// console.log("data", data);
 	const reviewNodes = data?.repository
 		? data?.repository?.reviews?.edges?.map((edge) => edge.node)
 		: [];
 
-	console.log("reviewNodes", reviewNodes);
+	// console.log("reviewNodes", reviewNodes);
 
 	if (loading) return <Text>loading</Text>;
 	const ReviewItem = ({ review }) => {
