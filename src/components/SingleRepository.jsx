@@ -7,7 +7,7 @@ import { GET_REPOSITORY } from "../graphql/queries";
 import theme from "../theme";
 import RepositoryItem from "./RepositoryItem";
 import Text from "./Text";
-//test file show
+
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: theme.colors.colorWhite,
@@ -54,7 +54,7 @@ const SingleRepository = () => {
 
 	const { loading, data, fetchMore } = useQuery(GET_REPOSITORY, {
 		fetchPolicy: "cache-and-network",
-		variables: { id, first: 5 },
+		variables: { id, first: 8 },
 	});
 
 	const handleFetchMore = () => {
@@ -67,7 +67,7 @@ const SingleRepository = () => {
 			variables: {
 				id,
 				after: data.repository.reviews.pageInfo.endCursor,
-				first: 5,
+				first: 8,
 			},
 			updateQuery: (previousResult, { fetchMoreResult }) => {
 				console.log("see this more result", fetchMoreResult);
