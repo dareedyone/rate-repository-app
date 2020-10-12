@@ -85,6 +85,9 @@ export const Dropdown = ({ setReposOption }) => {
 	return (
 		<RNPickerSelect
 			onValueChange={(value) => {
+				{
+					/* console.log("let's see those values", value); */
+				}
 				setReposOption(JSON.parse(value));
 			}}
 			items={[
@@ -156,6 +159,8 @@ export class RepositoryListContainer extends React.Component {
 		return (
 			<FlatList
 				data={this.props.repositories}
+				onEndReached={this.props.onEndReach}
+				onEndReachedThreshold={0.5}
 				ItemSeparatorComponent={ItemSeparator}
 				ListHeaderComponent={this.renderHeader}
 				renderItem={({ item }) => (
@@ -170,16 +175,23 @@ export class RepositoryListContainer extends React.Component {
 }
 
 const RepositoryList = () => {
-	const { repositories, setReposOption } = useRepositories();
+	const { repositories, setReposOption, fetchMore } = useRepositories();
+	// console.log(fetchMore);
+	// console.log(fetchMore, "is there ?");
 	const repositoryNodes = repositories
 		? repositories?.edges?.map((edge) => edge.node)
 		: [];
 	const history = useHistory();
+	console.log(repositoryNodes);
+	const onEndReach = () => {
+		fetchMore();
+	};
 	return (
 		<RepositoryListContainer
 			setReposOption={setReposOption}
 			repositories={repositoryNodes}
 			history={history}
+			onEndReach={onEndReach}
 		/>
 	);
 };
